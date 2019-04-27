@@ -47,7 +47,22 @@ int isahit(unsigned ref){
     return 1;
 }
 
-void initcache(void){
+void isamiss(unsigned ref){
+    int indx = ((ref >> 6) & 0x3ff) << 2;
+    int tag = (ref >> 16) & 0xffff;
+    int setindx, i;
+    setindx = indx % 4;
+    
+    for(i=0; i<4; i++){
+        if(l1[setindx].valid == 0) 
+    }
+}
+
+/* Design a module that fills a cache with 16 cachelines.
+   Uses i, j, setindx in order to step through the cache and 
+   place lines throughout the cache.
+*/
+void initcache(){
     int i, j, setindx;
 
     for(i=0; i<4; i++){
@@ -69,7 +84,7 @@ void printrslts(unsigned ref){
 
 }
 
-void processref(){
+processref(){
 
 }
 
