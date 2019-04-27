@@ -12,7 +12,10 @@ cache l1[SETS * LINES];
 int reference, miss; /* keep track of cache misses */
 
 int main(void) {
-    printf("Hello, World!\n");
+    void initcache(void);
+
+    initcache();
+
     return 0;
 }
 
@@ -45,7 +48,21 @@ int isahit(unsigned ref){
 }
 
 void initcache(void){
+    int i, j, setindx;
 
+    for(i=0; i<4; i++){
+        setindx = i%4;
+        if(i == 1) setindx <<2;
+        if(i == 2) setindx <<4;
+        if(i == 3) setindx <<6;
+        for(j=0; j<3; j++){
+            struct cacheline cl;
+            cl.age = 0;
+            cl.tag = 0;
+            cl.valid = 0;
+            l1[setindx+j] = cl;
+        }
+    }
 }
 
 void printrslts(unsigned ref){
